@@ -1,0 +1,19 @@
+[gcloud]
+disabled=true
+
+[kubernetes]
+disabled=false
+
+[time]
+disabled=false
+use_12hr=true
+time_format="%b %d %r (%Z)"
+
+[status]
+disabled=false
+symbol = '✖ '
+
+[git_commit]
+commit_hash_length = 7
+tag_disabled=false
+only_detached=false
