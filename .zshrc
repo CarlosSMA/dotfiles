@@ -153,6 +153,5 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 eval "$(starship init zsh)"
 
 #---------- ZOXIDE
-
 autoload -Uz compinit; compinit -i
 eval "$(zoxide init zsh)"
