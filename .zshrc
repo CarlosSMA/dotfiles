@@ -39,7 +39,8 @@ bindkey  '^[[3~' delete-char
 setopt autocd
 
 # Remove $ when running output on starship
-unsetopt PROMPT_SP
+# But without ommiting the output
+set +o prompt_cr +o prompt_sp
 
 # Delete / slashes instead of entire folder path
 export WORDCHARS=''
