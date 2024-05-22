@@ -73,10 +73,6 @@ source $HOME/google-cloud-sdk/completion.zsh.inc
 # Kubectx
 source ~/.zsh/kubectx-completion/
 
-#? https://github.com/zsh-users/zsh-completions
-# todo change later to antigen plugin
-# source ~/.zsh/zsh-completions/src/
-
 # Vagrant
 fpath=(/opt/vagrant/embedded/gems/gems/vagrant-2.4.1/contrib/zsh $fpath)
 
@@ -141,6 +137,7 @@ export PATH="$HOME/.local/share/fnm:$PATH"
 eval "$(fnm env --use-on-cd)"
 
 #---------- PLUGINS
+#todo change later to antidote. It's much better, and works fine with docker
 source ~/.zsh/antigen.zsh
 antigen bundle Aloxaf/fzf-tab
 antigen bundle zsh-users/zsh-syntax-highlighting
