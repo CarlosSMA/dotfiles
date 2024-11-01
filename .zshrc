@@ -1,3 +1,8 @@
+#Liferay-only. Should shell into custom image w/ installed ZSH stuff
+#if [[ $TILIX_ID ]] ; then
+#  docker run --mount src=$(pwd),target=/mnt,type=bind -it carlossma/zsh:0.0.1
+#fi
+
 #---------- STYLE
 # Colors for ls command
 eval $(dircolors)
@@ -73,6 +78,10 @@ source $HOME/google-cloud-sdk/completion.zsh.inc
 # Kubectx
 source ~/.zsh/kubectx-completion/
 
+#? https://github.com/zsh-users/zsh-completions
+# todo change later to antigen plugin
+# source ~/.zsh/zsh-completions/src/
+
 # Vagrant
 fpath=(/opt/vagrant/embedded/gems/gems/vagrant-2.4.1/contrib/zsh $fpath)
 
@@ -122,7 +131,6 @@ alias tf="terraform"
 alias tree="eza --tree"
 alias update_all="sudo apt update && sudo apt upgrade -y && flatpak update -y && sudo snap refresh"
 alias watch-1="watch -n1 "
-# alias z="z"
 
 #---------- APPLICATIONS
 # fzf
@@ -134,10 +142,9 @@ fpath=(${ASDF_DIR}/completions $fpath)
 
 # fnm
 export PATH="$HOME/.local/share/fnm:$PATH"
-eval "$(fnm env --use-on-cd)"
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 
 #---------- PLUGINS
-#todo change later to antidote. It's much better, and works fine with docker
 source ~/.zsh/antigen.zsh
 antigen bundle Aloxaf/fzf-tab
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -151,5 +158,5 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 eval "$(starship init zsh)"
 
 #---------- ZOXIDE
-autoload -Uz compinit; compinit -i
+autoload -Uz compinit && compinit -i
 eval "$(zoxide init zsh)"
