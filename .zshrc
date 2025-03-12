@@ -162,3 +162,6 @@ eval "$(zoxide init zsh)"
 #---------- FNM
 export PATH="$HOME/.local/share/fnm:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.local/bin:$GOROOT/bin:$HOME/go/bin:$PATH"
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
+
+#--------- direnv
+eval "$(direnv hook zsh)"
