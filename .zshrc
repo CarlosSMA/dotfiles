@@ -1,7 +1,9 @@
-#Liferay-only. Should shell into custom image w/ installed ZSH stuff
-#if [[ $TILIX_ID ]] ; then
-#  docker run --mount src=$(pwd),target=/mnt,type=bind -it carlossma/zsh:0.0.1
-#fi
+#---------- IDEs
+# Use emacs format for terminal navigation
+bindkey -e
+
+# Use vim as default editor for CLIs
+export EDITOR=vim
 
 #---------- STYLE
 # Colors for ls command
@@ -31,7 +33,8 @@ zstyle ':zle:*ward-word' word-style space
 
 # KEYBINDINGS
 #todo identify specifically what each one does
-bindkey $'\E[1;5D' emacs-backward-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 bindkey $'\E[1;5C' emacs-forward-word
 bindkey '^[[Z' reverse-menu-complete
 bindkey '^H' backward-kill-word
@@ -89,10 +92,10 @@ fpath=(/opt/vagrant/embedded/gems/gems/vagrant-2.4.1/contrib/zsh $fpath)
 #! Use ~/.aliases file to load sensitive aliases
 source $HOME/.aliases
 
-alias bcat="batcat"
+alias bcat="bat"
 alias bname="git branch | grep \* | cut -d ' ' -f 2 | tr -d '\n'"
 alias c="clear"
-alias cat="batcat -p"
+alias cat="bat -p"
 alias copy="xclip -sel clip"
 alias currentHash='git rev-parse --verify HEAD | cut -c1-8'
 alias cp="/opt/advcpmv/advcp -rg"
@@ -124,12 +127,12 @@ alias nt="npm run test"
 alias nt="npm run test"
 alias nvm="fnm"
 alias ping8="ping 8.8.8.8"
-alias pingg="ping 8.8.8.8"
+alias pingg="ping google.com"
 alias psrg="ps -ef | rg"
 alias stern="k stern"
 alias tf="terraform"
 alias tree="eza --tree"
-alias update_all="sudo apt update && sudo apt upgrade -y && flatpak update -y && sudo snap refresh"
+alias update_all="sudo dnf upgrade -y && flatpak update -y"
 alias watch-1="watch -n1 "
 
 #---------- APPLICATIONS
@@ -140,23 +143,25 @@ alias watch-1="watch -n1 "
 . $HOME/.asdf/asdf.sh
 fpath=(${ASDF_DIR}/completions $fpath)
 
-# fnm
-export PATH="$HOME/.local/share/fnm:$PATH"
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
-
 #---------- PLUGINS
-source ~/.zsh/antigen.zsh
-antigen bundle Aloxaf/fzf-tab
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
-antigen apply
+source $HOME/.antidote/antidote.zsh
+antidote load
 
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+source /usr/share/fzf/shell/key-bindings.zsh
 
 #---------- STARSHIP
 eval "$(starship init zsh)"
 
+#---------- GOLANG
+export GOROOT=$HOME/.local/share/go
+
 #---------- ZOXIDE
 autoload -Uz compinit && compinit -i
 eval "$(zoxide init zsh)"
+
+#---------- FNM
+export PATH="$HOME/.local/share/fnm:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.local/bin:$GOROOT/bin:$HOME/go/bin:$PATH"
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
+
+#--------- direnv
+eval "$(direnv hook zsh)"
