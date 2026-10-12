@@ -1,3 +1,8 @@
+export PATH="$HOME/aws/dist:$HOME/.cargo/bin:${ANT_HOME}/bin:${JAVA_HOME}/bin:${NPM_CONFIG_PREFIX}/bin:/opt/java/maven/bin:${HOME}/jpm/bin:/opt/quickemu:${PATH}"
+autoload bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+complete -C "$(which aws_completer)" aws
+
 #---------- IDEs
 # Use emacs format for terminal navigation
 bindkey -e
@@ -74,12 +79,6 @@ export HISTSIZE=1000
 export SAVEHIST=1000
 
 #---------- COMPLETIONS
-# Gcloud
-source $HOME/google-cloud-sdk/path.zsh.inc
-source $HOME/google-cloud-sdk/completion.zsh.inc
-
-# Kubectx
-source ~/.zsh/kubectx-completion/
 
 #? https://github.com/zsh-users/zsh-completions
 # todo change later to antigen plugin
@@ -98,7 +97,6 @@ alias c="clear"
 alias cat="bat -p"
 alias copy="xclip -sel clip"
 alias currentHash='git rev-parse --verify HEAD | cut -c1-8'
-alias cp="/opt/advcpmv/advcp -rg"
 alias d="docker"
 alias dbash="d run -it --entrypoint=/bin/bash"
 alias g="git"
@@ -118,7 +116,6 @@ alias ldo="lazydocker"
 alias lg="lazygit"
 alias ls="eza --icons --group-directories-first"
 alias minidocker='eval $(minikube docker-env)'
-alias mv="/opt/advcpmv/advmv -g"
 alias nb="npm run build"
 alias nf="npm run format"
 alias nrb="npm run build"
@@ -139,25 +136,15 @@ alias watch-1="watch -n1 "
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# asdf
-. $HOME/.asdf/asdf.sh
-fpath=(${ASDF_DIR}/completions $fpath)
-
 #---------- PLUGINS
 source $HOME/.antidote/antidote.zsh
 antidote load
 
 source /usr/share/fzf/shell/key-bindings.zsh
 
-#---------- STARSHIP
-eval "$(starship init zsh)"
 
 #---------- GOLANG
 export GOROOT=$HOME/.local/share/go
-
-#---------- ZOXIDE
-autoload -Uz compinit && compinit -i
-eval "$(zoxide init zsh)"
 
 #---------- FNM
 export PATH="$HOME/.local/share/fnm:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.local/bin:$GOROOT/bin:$HOME/go/bin:$PATH"
@@ -165,3 +152,20 @@ eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 
 #--------- direnv
 eval "$(direnv hook zsh)"
+
+[[ -f ~/.zshrc.custom ]] && source ~/.zshrc.custom
+
+#-------- edit command
+autoload -z edit-command-line
+
+# Define it as a widget
+zle -N edit-command-line
+
+# Bind it to Ctrl-x, Ctrl-e
+bindkey '^x^e' edit-command-line
+
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+
+complete -o nospace -C /home/me/.local/bin/tofu tofu
+complete -o nospace -C /usr/bin/tofu tofu
