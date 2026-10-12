@@ -1,0 +1,101 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "outline_panel": {
+    "dock": "right"
+  },
+  "title_bar": {
+    "show_onboarding_banner": false,
+    "show_user_picture": false,
+    "show_sign_in": false
+  },
+  "languages": {
+    "Go": {
+      "hard_tabs": true,
+    },
+    "HCL": {
+      "hard_tabs": true,
+    },
+    "Shell Script": {
+      "hard_tabs": true,
+      "tab_size": 4,
+    },
+    "YAML": {
+      "tab_size": 4,
+      "format_on_save": "off",
+    },
+    "Python": {
+      "tab_size": 4,
+    },
+    "Terraform": {
+      "hard_tabs": true,
+    },
+  },
+  "ensure_final_newline_on_save": false,
+  "ui_font_weight": 500.0,
+  "cli_default_open_behavior": "existing_window",
+  "format_on_save": "off",
+  "terminal": {
+    "font_size": 16.0,
+    "font_family": "MesloLGL Nerd Font",
+    "cursor_shape": "block",
+    "blinking": "on",
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": false,
+    },
+  },
+  "base_keymap": "VSCode",
+  "preview_tabs": {
+    "enabled": true,
+  },
+  "mouse_wheel_zoom": true,
+  "buffer_font_family": "MesloLGS Nerd Font",
+  "file_types": {
+    "xml": ["*.jelly"],
+    "yaml": ["*.yaml"],
+  },
+  "colorize_brackets": true,
+  "linked_edits": true,
+  "show_whitespaces": "all",
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+    "background_coloring": "indent_aware",
+  },
+  "soft_wrap": "editor_width",
+  "hard_tabs": false,
+  "tab_size": 2,
+  "agent_servers": {
+    "gemini": {
+      "default_model": "gemini-2.5-flash",
+      "type": "registry",
+    },
+    "claude-acp": {
+      "default_config_options": {
+        "effort": "xhigh",
+        "model": "default",
+        "mode": "bypassPermissions",
+      },
+      "type": "registry",
+    },
+  },
+  "ui_font_size": 17.0,
+  "buffer_font_size": 17.0,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark",
+  },
+}
